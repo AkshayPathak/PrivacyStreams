@@ -2,6 +2,7 @@ package io.github.privacystreams.communication;
 
 import android.Manifest;
 import android.database.Cursor;
+import android.provider.CallLog;
 
 import io.github.privacystreams.core.PStreamProvider;
 import io.github.privacystreams.utils.CommunicationUtils;
@@ -42,7 +43,8 @@ class CallLogProvider extends PStreamProvider {
                         android.provider.CallLog.Calls.NUMBER,
                         android.provider.CallLog.Calls.DATE,
                         android.provider.CallLog.Calls.TYPE,
-                        android.provider.CallLog.Calls.DURATION},
+                        android.provider.CallLog.Calls.DURATION,
+                        android.provider.CallLog.Calls.CACHED_NAME},
                 null,
                 null,
                 null
@@ -59,11 +61,13 @@ class CallLogProvider extends PStreamProvider {
                         String typeString = callLogTypeInString(
                                 c.getInt(c.getColumnIndex(android.provider.CallLog.Calls.TYPE)));
                         String duration = c.getString(c.getColumnIndex(android.provider.CallLog.Calls.DURATION));
+                        String name = c.getString(c.getColumnIndex(android.provider.CallLog.Calls.CACHED_NAME));
 
                         output(new Call(id, Long.valueOf(date),
                                 CommunicationUtils.normalizePhoneNumber(number),
                                 Long.valueOf(duration),
-                                typeString));
+                                typeString,
+                                name));
                         c.moveToNext();
                     }
 

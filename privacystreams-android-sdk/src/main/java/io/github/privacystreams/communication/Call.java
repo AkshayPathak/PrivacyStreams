@@ -37,6 +37,12 @@ public class Call extends Item {
     public static final String DURATION = "duration";
 
     /**
+     * The cached contact name of the phone number of the phone call
+     */
+    @PSItemField(type = String.class)
+    public static final String NAME = "name";
+
+    /**
      * The type of the phone call, could be "incoming", "outgoing" or "missed".
      */
     @PSItemField(type = String.class)
@@ -52,6 +58,15 @@ public class Call extends Item {
         this.setFieldValue(CONTACT, phone_number);
         this.setFieldValue(DURATION, duration);
         this.setFieldValue(TYPE, call_type);
+    }
+
+    Call(String id, Long timestamp, String phone_number, Long duration, String call_type, String name) {
+//        this.setFieldValue(ID, id);
+        this.setFieldValue(TIMESTAMP, timestamp);
+        this.setFieldValue(CONTACT, phone_number);
+        this.setFieldValue(DURATION, duration);
+        this.setFieldValue(TYPE, call_type);
+        this.setFieldValue(NAME, name);
     }
 
     /**

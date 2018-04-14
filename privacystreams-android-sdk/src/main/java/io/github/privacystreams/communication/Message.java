@@ -41,6 +41,11 @@ public class Message extends Item {
     public static final String TIMESTAMP = "timestamp";
 
     /**
+     * The name of the person sent to
+     */
+    public static final String NAME = "name";
+
+    /**
      * The message type, could be "received", "sent", "draft", "pending", or "unknown".
      */
     @PSItemField(type = String.class)
@@ -58,6 +63,15 @@ public class Message extends Item {
         this.setFieldValue(PACKAGE_NAME, packageName);
         this.setFieldValue(CONTACT, contact);
         this.setFieldValue(TIMESTAMP, timestamp);
+    }
+
+    Message(String type, String content, String packageName, String contact, long timestamp, String name){
+        this.setFieldValue(TYPE, type);
+        this.setFieldValue(CONTENT, content);
+        this.setFieldValue(PACKAGE_NAME, packageName);
+        this.setFieldValue(CONTACT, contact);
+        this.setFieldValue(TIMESTAMP, timestamp);
+        this.setFieldValue(NAME, name);
     }
 
     /**

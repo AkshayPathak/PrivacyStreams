@@ -37,6 +37,7 @@ class SMSMessageListProvider extends PStreamProvider {
                 Long dateSent = c.getLong(c.getColumnIndex("date_sent"));
                 String smsId = c.getString(c.getColumnIndex("_id"));
                 String address = CommunicationUtils.normalizePhoneNumber(c.getString(c.getColumnIndex("address")));
+                String name = c.getString(c.getColumnIndex("person"));
                 Integer type = c.getInt(c.getColumnIndex("type"));
                 String typeStr;
                 switch (type) {
@@ -52,7 +53,7 @@ class SMSMessageListProvider extends PStreamProvider {
                 Integer seen = c.getInt(c.getColumnIndex("seen"));
                 Integer read = c.getInt(c.getColumnIndex("read"));
 
-                Message message = new Message(typeStr, content, "system", address, date);
+                Message message = new Message(typeStr, content, "system", address, date, name);
 //                message.setFieldValue("date_sent", dateSent);
                 message.setFieldValue("sms_id", smsId);
                 message.setFieldValue("seen", seen==1);
